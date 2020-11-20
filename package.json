@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/chris097/Lib-Shelter_Api/issues"
   },
-  "homepage": "https://github.com/chris097/Lib-Shelter_Api#readme"
+  "homepage": "https://github.com/chris097/Lib-Shelter_Api#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "mongoose": "^5.10.15",
+    "nodemon": "^2.0.6"
+  }
 }
