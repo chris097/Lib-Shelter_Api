@@ -18,8 +18,10 @@
   "homepage": "https://github.com/chris097/Lib-Shelter_Api#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "helmet": "^4.2.0",
     "joi": "^13.1.0",
     "mongoose": "^5.10.15",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.6"
   }
 }
