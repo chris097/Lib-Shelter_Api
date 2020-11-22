@@ -2,15 +2,7 @@ const mongoose = require('mongoose')
 const Joi = require("joi");
 const express = require('express');
 const router = express.Router();
-
-const Item = mongoose.model('Item', new mongoose.Schema({
-    name:{
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 50
-    }
-}))
+const Item = require('../models/items');
 
 //GET
 router.get('/', async (req, res) => {
@@ -59,12 +51,12 @@ router.delete('/:id', async (req, res) => {
      res.send(item)
 })
 
-function validateCourse(course) { 
+function validateCourse(item) { 
     //Validate
     const schema = {
         name: Joi.string().min(5).max(50).required()
-    } 
-    return Joi.validate(course, schema)
+    }
+    return Joi.validate(item, schema)
 }
 
 module.exports = router;
