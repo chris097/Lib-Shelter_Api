@@ -1,8 +1,6 @@
-const mongoose = require('mongoose')
-const Joi = require("joi");
 const express = require('express');
 const router = express.Router();
-const Item = require('../models/items');
+const {Item, validate} = require('../models/items');
 
 //GET
 router.get('/', async (req, res) => {
@@ -19,7 +17,7 @@ router.get('/:id', async (req, res) =>{
 
 //POST
 router.post('/', async (req, res) => {
-    const {error} = validateCourse(req.body)
+    const {error} = validate(req.body)
 
     if(error) return res.status(400).send(error.details[0].message)
 
@@ -31,7 +29,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
      //validate
-     const {error} = validateCourse(req.body)
+     const {error} = validate(req.body)
      //If invalid, return 400 -Bad request
      if(error) return res.status(400).send(error.details[0].message)
     //Update Items
@@ -50,13 +48,5 @@ router.delete('/:id', async (req, res) => {
       //Return the same item
      res.send(item)
 })
-
-function validateCourse(item) { 
-    //Validate
-    const schema = {
-        name: Joi.string().min(5).max(50).required()
-    }
-    return Joi.validate(item, schema)
-}
 
 module.exports = router;
