@@ -5,7 +5,7 @@ const {Item, validate} = require('../models/items');
 
 //GET
 router.get('/', async (req, res) => {
-    const item = await Item.find().sort('author')
+    const item = await Item.find()
     res.send(item)
 })
 
