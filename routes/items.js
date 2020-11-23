@@ -1,10 +1,11 @@
 const express = require('express');
+const { description } = require('joi');
 const router = express.Router();
 const {Item, validate} = require('../models/items');
 
 //GET
 router.get('/', async (req, res) => {
-    const item = await Item.find().sort('name')
+    const item = await Item.find().sort('author')
     res.send(item)
 })
 
@@ -21,7 +22,14 @@ router.post('/', async (req, res) => {
 
     if(error) return res.status(400).send(error.details[0].message)
 
-    let item = new Item({name: req.body.name})
+    let item = new Item({
+        author: req.body.author,
+        title: req.body.title,
+        description: req.body.description,
+        bookUrl: req.body.bookUrl,
+        isPublished: req.body.isPublished,
+        ISBN: req.body.ISBN
+    })
     item = await item.save()
 
     res.send(item)
@@ -33,7 +41,15 @@ router.put('/:id', async (req, res) => {
      //If invalid, return 400 -Bad request
      if(error) return res.status(400).send(error.details[0].message)
     //Update Items
-    const item = await Item.findByIdAndUpdate(req.params.id,  {name: req.body.name}, {new: true})
+    const item = await Item.findByIdAndUpdate(
+        req.params.id,  
+        {author: req.body.author},
+        {title: req.body.title},
+        {description: req.body.description},
+        {bookUrl: req.body.bookUrl},
+        {isPublished: req.body.isPublished},
+        {ISBN: req.body.ISBN},
+        {new: true})
     //If not existing, return 404
     if(!item) res.status(404).send('The items of the given ID was not found...')
     //Return the update Items
