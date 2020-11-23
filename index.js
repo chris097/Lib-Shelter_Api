@@ -1,4 +1,5 @@
 require('express-async-errors')
+const winston = require('winston')
 const error = require('./middleware/error')
 require('express-async-errors')
 const mongoose = require('mongoose');
@@ -6,6 +7,8 @@ const helmet = require('helmet')
 const items = require('./routes/items')
 const express = require("express");
 const app = express();
+
+winston.add(winston.transports.File, { filename: 'logfile.log' })
 //Connected to MongoDB
 mongoose.connect('mongodb://localhost/lib-shelter')
 .then(() => console.log('Connected to MongoDB...'))
@@ -20,4 +23,4 @@ console.log(app.get('env'))
 
 //Environment Variable
 const port = process.env.PORT || 4040;
-app.listen(port, console.log(`Listening on port ${port}...`))
+app.listen(port, winston.info(`Listening on port ${port}...`))
