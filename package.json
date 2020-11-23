@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/chris097/Lib-Shelter_Api#readme",
   "dependencies": {
+    "compression": "^1.7.2",
     "express": "^4.17.1",
     "express-async-errors": "^2.1.0",
     "helmet": "^4.2.0",
