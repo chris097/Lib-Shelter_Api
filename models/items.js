@@ -25,10 +25,16 @@ const Item = mongoose.model('Item', new mongoose.Schema({
     },
     isPublished:{
         type: Number,
-        required: true
+        required: true,
+        min: 4,
+        max: 4
     },
     ISBN:{
         type: String
+    },
+    date:{
+        type: Date,
+        default: Date.now
     }
 }))
 
@@ -40,7 +46,7 @@ function validateCourse(item) {
         title: Joi.string().min(5).max(50).required(),
         description: Joi.string().min(50).max(500).required(),
         bookUrl: Joi.string(),
-        isPublished: Joi.number().required(),
+        isPublished: Joi.number().required().max(4).min(4),
         ISBN: Joi.string()
     }
     return Joi.validate(item, schema)

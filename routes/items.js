@@ -1,5 +1,4 @@
 const express = require('express');
-const { description } = require('joi');
 const router = express.Router();
 const {Item, validate} = require('../models/items');
 
@@ -43,12 +42,14 @@ router.put('/:id', async (req, res) => {
     //Update Items
     const item = await Item.findByIdAndUpdate(
         req.params.id,  
-        {author: req.body.author},
-        {title: req.body.title},
-        {description: req.body.description},
-        {bookUrl: req.body.bookUrl},
-        {isPublished: req.body.isPublished},
-        {ISBN: req.body.ISBN},
+        {
+            author: req.body.author,
+            title: req.body.title,
+            description: req.body.description,
+            bookUrl: req.body.bookUrl,
+            isPublished: req.body.isPublished,
+            ISBN: req.body.ISBN
+        },
         {new: true})
     //If not existing, return 404
     if(!item) res.status(404).send('The items of the given ID was not found...')
