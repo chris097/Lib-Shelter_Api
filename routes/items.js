@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
         description: req.body.description,
         bookUrl: req.body.bookUrl,
         isPublished: req.body.isPublished,
-        ISBN: req.body.ISBN
+        imageUrl: req.body.imageUrl
     })
     item = await item.save()
 
@@ -48,7 +48,7 @@ router.put('/:id', async (req, res) => {
             description: req.body.description,
             bookUrl: req.body.bookUrl,
             isPublished: req.body.isPublished,
-            ISBN: req.body.ISBN
+            imageUrl: req.body.imageUrl
         },
         {new: true})
     //If not existing, return 404
