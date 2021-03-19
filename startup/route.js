@@ -12,5 +12,6 @@ module.exports = function(app){
     app.use('/api/items', items)
     app.use('/api/comments', comments)
     app.use('/api/user', user)
+    app.use('/api/user', likes)
     app.use(error)
 }
